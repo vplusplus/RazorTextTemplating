@@ -1,4 +1,24 @@
 ﻿@namespace Templates
-@model Cls
 
-// @this.Model.Name
+@using SampleClient.Models
+
+@model IList<Pet>
+
+@try
+{
+    @foreach (var pet in this.Model) {
+        <p>@pet.Name</p>
+    }
+}
+catch(Exception err) {
+    <text> 
+    // @err.Message 
+    </text>
+}
+finally {
+    <text>
+    // Finally 
+    </text>
+}
+
+

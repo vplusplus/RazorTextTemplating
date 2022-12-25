@@ -8,19 +8,8 @@ namespace SampleClient
         {
             try
             {
-                var c = new Models.Cls()
-                {
-                    Name = "Customer"
-                };
-
-                c.Properties.Add(new() { Name = "Id", Type = "string" });
-                c.Properties.Add(new() { Name = "Name", Type = "string" });
-                c.Properties.Add(new() { Name = "Created", Type = "DateTime" });
-                c.Properties.Add(new() { Name = "Modified", Type = "DateTime" });
-
                 var template = new Templates.Hello();
-                template.Model = c;
-
+                template.Model = Mock.MakePets();
                 var output = await template.RenderAsync();
                 Console.WriteLine(output);
             }

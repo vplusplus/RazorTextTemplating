@@ -5,13 +5,26 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <EmitCompilerGeneratedFiles>True</EmitCompilerGeneratedFiles>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="vplusplus.RazorTextTemplating" Version="1.0.0-beta.4" />
+    <CompilerVisibleProperty Include="MSBuildProjectDirectory" />
+    <CompilerVisibleProperty Include="RootNamespace" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include=".\**\*.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference 
+      Include="..\vplusplus.RazorTextTemplating\vplusplus.RazorTextTemplating.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false" />
   </ItemGroup>
   
 </Project>
-
-

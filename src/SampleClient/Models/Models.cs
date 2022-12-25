@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace SampleClient.Models
 {
-    internal class Cls
+    public class Pet
     {
-        public string? Namespace { get; set; } = "Models";
-        public string? Name { get; set; }
-        public List<Prop> Properties { get; } = new();
-
+        public string Name { get; set; }
     }
 
-    internal class Prop
+    public static class Mock
     {
-        public string? Name { get; set; }
-        public string? Type { get; set; }
+        public static IList<Pet> MakePets()
+        {
+            return new List<Pet>
+            {
+                new Pet { Name = "Rin Tin Tin" },
+                new Pet { Name = "Mr. Bigglesworth" },
+                new Pet { Name = "K-9" }
+            };
+        }
     }
 }

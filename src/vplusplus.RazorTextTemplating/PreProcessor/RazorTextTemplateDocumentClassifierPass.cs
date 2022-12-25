@@ -29,12 +29,12 @@ namespace RazorTextTemplating.PreProcessor
             // TryComputeNamespace() will discover the @namespace directive value.
             namespaceNode.Content = codeDocument.TryComputeNamespace(fallbackToRootNamespace: false, out var namespaceName) ? namespaceName : "Templates";
 
-            // Generated class is internal and partial.
-            // TODO: ClassName is NOT sanitized.
+            // Generated class is partial.
             // Example: internal partial class <ClassName>
+            // NOTE/TODO: ClassName is NOT sanitized.
             classNode.ClassName = Path.GetFileNameWithoutExtension(codeDocument.Source.FilePath);
             classNode.Modifiers.Clear();
-            classNode.Modifiers.Add("internal");
+            classNode.Modifiers.Add("public");
             classNode.Modifiers.Add("partial");
 
             // Generated method is private.
