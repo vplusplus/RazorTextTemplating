@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <IsRoslynComponent>True</IsRoslynComponent>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <!-- Generator's dependencies -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.4.0" PrivateAssets="all" ExcludeAssets="Runtime" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" PrivateAssets="all" ExcludeAssets="Runtime" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="6.0.11" PrivateAssets="all" GeneratePathProperty="true" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    
+    <!-- My Nuget package Details -->
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <VersionSuffix>beta.1</VersionSuffix>
+    <Authors>Venkatesh Ramakrishnan</Authors>
+    <Company>vplusplus.org</Company>
+    <Copyright>Copyright @vplusplus.org 2022</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Title>RazorTextTemplate Incremental Generator</Title>
+    <Description>Provides IncrementalGenerator that can preprocess RazorTextTemplate to a stand-alone-class with no dependencies.</Description>
+    <RepositoryUrl>https://github.com/vplusplus/RazorTextTemplating</RepositoryUrl>
+
+    <!-- My Nuget package content. -->
+    <IsPackable>True</IsPackable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IncludeBuildOutput>False</IncludeBuildOutput>
+    <NoWarn>$(NoWarn);RS2008;NU5128;NU5100</NoWarn>
+
+    <!-- My Nuget package folders -->
+    <MyPkgBinFolder>generators\</MyPkgBinFolder>
+    <MyPkgBuildFolder>build\</MyPkgBuildFolder>
+    
+  </PropertyGroup>
+
+  <!-- 
+      Package our .props and .targets to the '[PKG]\build' folder.
+      Package our DLLs to '[PKG]\generators\' folder.
+      Using a different folder as against the well-known '[PKG]\analyzers\dotnet\cs\' folder. 
+      Using the well-known folder results in our dependencies also treated as analysers.
+  -->
+  <ItemGroup>
+    <None Pack="true" PackagePath="$(MyPkgBinFolder)" Include="$(OutputPath)\$(AssemblyName).dll" Visible="false" />
+    <None Pack="true" PackagePath="$(MyPkgBinFolder)" Include="$(PkgMicrosoft_AspNetCore_Razor_Language)\lib\netstandard2.0\*.dll" Visible="false" />
+    <None Pack="true" PackagePath="$(MyPkgBuildFolder)" Include="MSBuildPropsAndTargets\*.props" />
+    <None Pack="true" PackagePath="$(MyPkgBuildFolder)" Include="MSBuildPropsAndTargets\*.targets" />
+  </ItemGroup>
+
+  <!-- OPTIONAL: Copy package to my local repo -->
+  <!-- OPTIONAL: Copy nupkg as zip to inspect the content -->
+  <Target Name="CopyPackageToMyLocalPackagesFolder" AfterTargets="Pack">
+    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFolder="D:\MyPackages" />
+    <Copy SourceFiles="$(OutputPath)..\$(PackageId).$(PackageVersion).nupkg" DestinationFiles="D:\MyPackages\$(PackageId).zip" />
+  </Target>
+
+</Project>
