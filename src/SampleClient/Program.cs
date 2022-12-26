@@ -10,6 +10,7 @@ namespace SampleClient
             {
                 var template = new Templates.Hello();
                 template.Model = Mock.MakePets();
+                
                 var output = await template.RenderAsync();
                 Console.WriteLine(output);
             }

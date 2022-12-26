@@ -7,7 +7,13 @@
 @try
 {
     @foreach (var pet in this.Model) {
+        <text>
+        [*]
         <p>@pet.Name</p>
+
+
+
+        </text>
     }
 }
 catch(Exception err) {
@@ -17,8 +23,11 @@ catch(Exception err) {
 }
 finally {
     <text>
+    [*] 
     // Finally 
     </text>
 }
+
+
 
 
