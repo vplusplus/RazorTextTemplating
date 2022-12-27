@@ -55,7 +55,7 @@ namespace vplusplus.RazorTextTemplating.SourceGenerator
                 if (null != fileInfo)
                 {
                     buffer
-                        .Append(fileInfo.LastAccessTimeUtc.Ticks)
+                        .Append(fileInfo.LastWriteTimeUtc.Ticks)
                         .Append("|")
                         .Append(fileInfo.Length)
                         .Append("|")
